@@ -1,2 +1,2 @@
 # Discord-Destroyer
-Lmfao why not
+Shoutout [Addi](https://github.com/addi00000)
