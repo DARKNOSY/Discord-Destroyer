@@ -1,7 +1,8 @@
 @echo off & cls
-color 7
+color 4
 
 py -m builder
 
+color 7
 pause
 exit
